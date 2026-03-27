@@ -1,0 +1,16 @@
+{
+  "name": "eden-uploader",
+  "version": "1.0.0",
+  "description": "Automates saving YouTube links to Eden.so",
+  "main": "eden_upload.js",
+  "scripts": {
+    "setup-browser": "npx playwright install chromium",
+    "setup-gmail": "node eden_setup_gmail.js",
+    "start": "node eden_upload.js",
+    "verify": "node eden_verify.js"
+  },
+  "dependencies": {
+    "playwright": "^1.44.0",
+    "googleapis": "^140.0.0"
+  }
+}
