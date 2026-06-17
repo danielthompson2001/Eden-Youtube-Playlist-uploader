@@ -1,0 +1,12 @@
+node_modules/
+package-lock.json
+.DS_Store
+eden_error.png
+
+# Local input/credentials — don't commit
+links.txt
+gmail_credentials.json
+gmail_token.json
+
+# Local Eden target ids
+.env

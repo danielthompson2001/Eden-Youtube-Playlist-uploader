@@ -1,16 +1,14 @@
 {
   "name": "eden-uploader",
-  "version": "1.0.0",
-  "description": "Automates saving YouTube links to Eden.so",
-  "main": "eden_upload.js",
+  "version": "2.0.0",
+  "description": "Saves YouTube links to Eden.so via the Eden MCP server",
+  "type": "module",
+  "main": "eden_mcp_upload.js",
   "scripts": {
-    "setup-browser": "npx playwright install chromium",
-    "setup-gmail": "node eden_setup_gmail.js",
-    "start": "node eden_upload.js",
-    "verify": "node eden_verify.js"
+    "start": "node eden_mcp_upload.js",
+    "dry-run": "DRY_RUN=1 node eden_mcp_upload.js"
   },
   "dependencies": {
-    "playwright": "^1.44.0",
-    "googleapis": "^140.0.0"
+    "@modelcontextprotocol/sdk": "^1.29.0"
   }
 }
