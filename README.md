@@ -72,6 +72,10 @@ workspace/board, the script auto-selects it and you can skip this entirely.
 - `eden_mcp_upload.js` — loads your links, resolves the target workspace/board,
   and saves the URLs in batches via Eden's `eden_save_links_to_board` tool. Eden
   classifies each URL (YouTube/Twitter/etc. become platform cards).
+  Duplicate links in your list are dropped, and links already on the target
+  board are skipped (YouTube URLs match by video id), so re-running after a
+  partial failure won't create duplicate cards. Links Eden can't turn into a
+  card are reported as skipped.
 
 ## Environment variables
 
@@ -82,6 +86,8 @@ workspace/board, the script auto-selects it and you can skip this entirely.
 | `EDEN_BOARD_ID`      | Target board (auto-selected if it's the only board).          |
 | `EDEN_SETUP=1`       | Print your workspaces + boards (with ids to copy), then exit. |
 | `EDEN_LIST=1`        | Print every tool the Eden MCP server exposes, then exit.      |
+| `EDEN_FORCE=1`       | Save links even if they're already on the target board.       |
+| `EDEN_AUTH_TIMEOUT`  | Seconds to wait for browser authorization (default `300`).    |
 | `EDEN_CALLBACK_PORT` | Local OAuth redirect port (default `8788`).                   |
 | `EDEN_STORE_DIR`     | Where to cache OAuth credentials (default `~/.eden-mcp`).     |
 
