@@ -44,8 +44,8 @@ npm run dry-run
 
 ## Choosing where links land
 
-Links are saved onto a specific **board** in a specific **workspace**. Discover
-their ids once:
+By default links are saved to the **DOAC** board (`69090383-589f-4e3c-a97d-c0b76bd62daf`),
+so `npm start` needs no setup. To use a different board, discover its id:
 
 ```bash
 EDEN_SETUP=1 npm start
@@ -60,7 +60,7 @@ EDEN_BOARD_ID=...
 ```
 
 Then `npm start` saves to that board with no extra flags. If you have only one
-workspace/board, the script auto-selects it and you can skip this entirely.
+workspace, it's auto-selected and you can leave `EDEN_WORKSPACE_ID` blank.
 
 ## How it works
 
@@ -83,7 +83,7 @@ workspace/board, the script auto-selects it and you can skip this entirely.
 | -------------------- | ------------------------------------------------------------- |
 | `DRY_RUN=1`          | Connect and show the plan, but save nothing.                  |
 | `EDEN_WORKSPACE_ID`  | Target workspace (auto-selected if you have only one).        |
-| `EDEN_BOARD_ID`      | Target board (auto-selected if it's the only board).          |
+| `EDEN_BOARD_ID`      | Target board (defaults to the DOAC board).                    |
 | `EDEN_SETUP=1`       | Print your workspaces + boards (with ids to copy), then exit. |
 | `EDEN_LIST=1`        | Print every tool the Eden MCP server exposes, then exit.      |
 | `EDEN_FORCE=1`       | Save links even if they're already on the target board.       |

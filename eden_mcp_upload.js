@@ -18,7 +18,7 @@
  * OPTIONS (env):
  *   DRY_RUN=1            connect + show the plan, but save nothing
  *   EDEN_WORKSPACE_ID    target workspace (auto-selected if you have only one)
- *   EDEN_BOARD_ID        target board (auto-selected if it's the only board)
+ *   EDEN_BOARD_ID        target board (defaults to the DOAC board, DEFAULT_BOARD_ID)
  *   EDEN_LIST=1          print every tool the Eden MCP server exposes, then exit
  *   EDEN_SETUP=1         print your workspaces + boards (ids to copy), then exit
  *   EDEN_FORCE=1         save even links that are already on the target board
@@ -47,6 +47,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const DRY_RUN = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
 const SAVE_TOOL = 'eden_save_links_to_board';
+// Board links land on when EDEN_BOARD_ID isn't set: "DOAC" in Daniel's Workplace.
+const DEFAULT_BOARD_ID = '69090383-589f-4e3c-a97d-c0b76bd62daf';
 const BATCH_SIZE = 25; // urls per save call (Eden caps at 40)
 const PAGE_SIZE = 500; // max items per eden_list_workspace_items page
 const FORCE = process.env.EDEN_FORCE === '1' || process.env.EDEN_FORCE === 'true';
@@ -184,6 +186,10 @@ async function resolveWorkspace(client) {
 
 async function resolveBoard(client, workspaceId) {
   if (process.env.EDEN_BOARD_ID) return process.env.EDEN_BOARD_ID;
+  if (DEFAULT_BOARD_ID) {
+    log(`Board: DOAC default (${DEFAULT_BOARD_ID}) — set EDEN_BOARD_ID to use another board`, 'success');
+    return DEFAULT_BOARD_ID;
+  }
   const boards = await getBoards(client, workspaceId);
   if (boards.length === 1) {
     log(`Board: ${boards[0].title || boards[0].id} (${boards[0].id})`, 'success');
